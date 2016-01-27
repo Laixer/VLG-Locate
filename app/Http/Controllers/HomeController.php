@@ -27,6 +27,11 @@ class HomeController extends Controller
         return view('source_new');
     }
 
+    public function about(Request $request)
+    {
+        dd(Auth::user());
+    }
+
 	public function doProjectNew(Request $request)
 	{
         $this->validate($request, [

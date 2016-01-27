@@ -25,7 +25,6 @@
 Route::group(['middleware' => ['web']], function () {
 	Route::get('auth', 'AuthController@redirectToProvider');
 	Route::get('auth/callback', 'AuthController@handleProviderCallback');
-
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
@@ -34,4 +33,5 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/source/new', 'HomeController@SourceNew');
 	Route::post('/project/new', 'HomeController@doProjectNew');
 	Route::post('/source/new', 'HomeController@doSourceNew');
+	Route::get('/about', 'HomeController@about');
 });
