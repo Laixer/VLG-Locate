@@ -17,10 +17,12 @@
 
                     <div class="row">
                         <div class="col-sm-8"></div>
+                        @if (Auth::user()->canWrite())
                         <div class="col-sm-4 text-right">
                             <a href="{{ url('/source/new') }}" class="btn btn-primary ">Nieuwe opnemer</a>
                             <a href="{{ url('/project/new') }}" class="btn btn-primary ">Nieuw project</a>
                         </div>
+                        @endif
                     </div>
 
                     <table class="footable table table-stripped" style="margin-top:20px;" data-page-size="10" data-filter=#filter>
