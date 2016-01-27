@@ -23,12 +23,13 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-	Route::get('auth', 'Auth\AuthController@redirectToProvider');
-	Route::get('auth/callback', 'Auth\AuthController@handleProviderCallback');
+	Route::get('auth', 'AuthController@redirectToProvider');
+	Route::get('auth/callback', 'AuthController@handleProviderCallback');
 
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
-	Route::get('/', 'HomeController@welcome');
-	Route::get('/list', 'HomeController@getList');
+	Route::get('/', 'HomeController@dashboard');
+	Route::get('/project/new', 'HomeController@projectNew');
+	Route::post('/project/new', 'HomeController@doProjectNew');
 });

@@ -40,12 +40,12 @@
 
                         <ul class="nav navbar-top-links navbar-right">
                             <li>
-                                <a href="{{ url('http://localhost:7070/') }}">
+                                <a href="https://mx.rotterdam-monitoring.com/">
                                     <i class="fa fa-sign-out"></i> Email
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('http://localhost:7070/') }}">
+                                <a href="https://www.rotterdam-vlg.com/">
                                     <i class="fa fa-sign-out"></i> Portal
                                 </a>
                             </li>
