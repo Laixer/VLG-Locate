@@ -36,10 +36,8 @@ return [
     ],
 
     'vlgportal' => [
-        // 'key'    => env('VLGPORTAL_KEY'),
-        // 'secret' => env('VLGPORTAL_SECRET'),
-        'key'    => '4bf54c49889c7f998caaa1b0201fb38bd8a48d79',
-        'secret' => 'a243f0b295560440af1e8dd23f887bb3a4fb187b',
+        'key'    => env('VLGPORTAL_KEY'),
+        'secret' => env('VLGPORTAL_SECRET'),
     ],
 
 ];

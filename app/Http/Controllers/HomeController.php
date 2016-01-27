@@ -12,7 +12,6 @@ class HomeController extends Controller
 
 	public function welcome(Request $request)
 	{
-		// return view('welcome');
 		return view('dashboard');
 	}
 
