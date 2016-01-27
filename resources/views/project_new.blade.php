@@ -1,8 +1,6 @@
-<?php $nav = 'admin'; ?>
-
 @extends('layouts.app')
 
-@section('title', 'Gebruikers')
+@section('title', 'Nieuw project')
 
 @section('content')
 <div class="wrapper wrapper-content">

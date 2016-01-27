@@ -32,7 +32,7 @@
                     <div class="navbar-collapse collapse" id="navbar">
                         <ul class="nav navbar-nav">
 
-                            <li class="{{ $nav == 'dashboard' ? 'active' : '' }}">
+                            <li class="">
                                 <a aria-expanded="false" role="button" href="{{ url('/') }}"> Dashboard</a>
                             </li>
 

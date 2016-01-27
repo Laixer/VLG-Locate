@@ -31,5 +31,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/', 'HomeController@dashboard');
 	Route::get('/project/new', 'HomeController@projectNew');
+	Route::get('/source/new', 'HomeController@SourceNew');
 	Route::post('/project/new', 'HomeController@doProjectNew');
+	Route::post('/source/new', 'HomeController@doSourceNew');
 });

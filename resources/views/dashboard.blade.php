@@ -16,8 +16,9 @@
                 <div class="ibox-content">
 
                     <div class="row">
-                        <div class="col-sm-10"></div>
-                        <div class="col-sm-2 text-right">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4 text-right">
+                            <a href="{{ url('/source/new') }}" class="btn btn-primary ">Nieuwe opnemer</a>
                             <a href="{{ url('/project/new') }}" class="btn btn-primary ">Nieuw project</a>
                         </div>
                     </div>

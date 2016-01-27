@@ -22,10 +22,15 @@ class HomeController extends Controller
 		return view('project_new');
 	}
 
+    public function SourceNew(Request $request)
+    {
+        return view('source_new');
+    }
+
 	public function doProjectNew(Request $request)
 	{
         $this->validate($request, [
-            'number' => 'required',
+            'number' => 'required|unique:locations',
             'name' => 'required',
             'placed' => 'required',
             'removed' => 'required',
@@ -70,5 +75,19 @@ class HomeController extends Controller
 
         return back()->with('success', 'Project toegevoegd');
 	}
+
+    public function doSourceNew(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $source = new Source;
+        $source->name = $request->input('name');
+
+        $source->save();
+
+        return back()->with('success', 'Opnemer toegevoegd');
+    }
 
 }
