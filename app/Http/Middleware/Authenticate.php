@@ -21,6 +21,11 @@ class Authenticate
             return redirect()->guest('/auth');
         }
 
+        if (!Auth::guard($guard)->user()->canRead()) {
+            Auth::logout();
+            return redirect()->guest('/unauth');
+        }
+
         return $next($request);
     }
 }

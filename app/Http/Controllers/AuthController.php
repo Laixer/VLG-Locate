@@ -66,4 +66,15 @@ class AuthController extends Controller
 
         return redirect($this->redirectTo);
     }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function unauth(Request $request)
+    {
+        return view('unauth');
+    }
+    
 }

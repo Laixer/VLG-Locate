@@ -27,6 +27,11 @@ class HomeController extends Controller
         return view('source_new');
     }
 
+    public function unauth(Request $request)
+    {
+        return view('lockscreen');
+    }
+
     public function about(Request $request)
     {
         dd(Auth::user());
