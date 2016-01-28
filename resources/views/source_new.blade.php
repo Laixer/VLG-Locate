@@ -1,3 +1,5 @@
+<?php $nav = 'sources'; ?>
+
 @extends('layouts.app')
 
 @section('title', 'Nieuwe opnemer')

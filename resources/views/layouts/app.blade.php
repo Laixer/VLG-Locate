@@ -32,8 +32,11 @@
                     <div class="navbar-collapse collapse" id="navbar">
                         <ul class="nav navbar-nav">
 
-                            <li class="">
-                                <a aria-expanded="false" role="button" href="{{ url('/') }}"> Dashboard</a>
+                            <li class="{{ $nav == 'dashboard' ? 'active' : '' }}">
+                                <a aria-expanded="false" role="button" href="{{ url('/') }}"> Projecten</a>
+                            </li>
+                            <li class="{{ $nav == 'sources' ? 'active' : '' }}">
+                                <a aria-expanded="false" role="button" href="{{ url('/sources') }}"> Opnemers</a>
                             </li>
 
                         </ul>

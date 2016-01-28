@@ -1,4 +1,4 @@
-<?php $nav = 'dashboard'; ?>
+<?php $nav = 'sources'; ?>
 
 @extends('layouts.app')
 
@@ -20,7 +20,6 @@
                         @if (Auth::user()->canWrite())
                         <div class="col-sm-4 text-right">
                             <a href="{{ url('/source/new') }}" class="btn btn-primary ">Nieuwe opnemer</a>
-                            <a href="{{ url('/project/new') }}" class="btn btn-primary ">Nieuw project</a>
                         </div>
                         @endif
                     </div>
@@ -28,40 +27,22 @@
                     <table class="footable table table-stripped" style="margin-top:20px;" data-page-size="10" data-filter=#filter>
                         <thead>
                             <tr>
-                                <th>Nummer</th>
-                                <th>Naam</th>
-                                <th>Opnemer</th>
-                                <th>Adres</th>
-                                <th>Postcode</th>
-                                <th>Geplaatst</th>
-                                <th>Verwijderd</th>
-                                <th>Contact</th>
-                                <th>Telefoon</th>
-                                <th>Email</th>
-                                <th>Data gevraagd</th>
-                                <th class="text-right" data-sort-ignore="true">Opmerking</th>
+                                <th data-sort-ignore="true">Naam</th>
+                                <th data-sort-ignore="true">Project</th>
                                 <th class="text-right" data-sort-ignore="true"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(App\Location::all() as $list)
+                            @foreach(App\Source::all() as $list)
                             <tr>
-                                <td>{{ $list->number }}</td>
                                 <td>{{ $list->name }}</td>
-                                <td>{{ $list->source->name }}</td>
-                                <td>{{ $list->address . ' ' . $list->address_number }}</td>
-                                <td>{{ $list->postal }}</td>
-                                <td>{{ $list->placed_at }}</td>
-                                <td>{{ $list->removed_at }}</td>
-                                <td>{{ $list->contact_name }}</td>
-                                <td>{{ $list->phone }}</td>
-                                <td>{{ $list->email }}</td>
-                                <td>{{ $list->data_requested ? 'Ja' : 'Nee' }}</td>
-                                <td>{{ $list->note }}</td>
+                                <td>{{ $list->isAvailable() ? '-' : $list->location->name }}</td>
                                 <td class="text-right">
+                                    @if ($list->isAvailable())
                                     <div class="btn-group">
-                                        <a href="{{ url('/project/edit') . '?id=' . $list->id }}" class="btn-white btn btn-xs no-margins">Bewerk</a>
+                                        <a href="{{ url('/source/delete') . '?id=' . $list->id --}}" class="btn-danger btn btn-xs no-margins">Verwijderen</a>
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

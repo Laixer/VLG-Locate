@@ -23,4 +23,13 @@ class Source extends Model
 
 		return true;
 	}
+
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function location()
+    {
+        return $this->hasOne('App\Location');
+    }
+
 }

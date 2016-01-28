@@ -27,7 +27,7 @@ class CreateLocation extends Migration
             $table->string('postal', 6);
             $table->string('city', 50);
             $table->date('placed_at');
-            $table->date('removed_at');
+            $table->date('removed_at')->nullable();
             $table->string('contact_name', 60);
             $table->string('phone', 15);
             $table->string('email', 120);
