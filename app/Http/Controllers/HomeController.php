@@ -12,6 +12,19 @@ use VLG\GSSAuth\Hello;
 class HomeController extends Controller
 {
 
+    /**
+     * Instantiate a new UserController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth.edit', ['except' => [
+            'dashboard',
+            'sources',
+        ]]);
+    }
+
 	public function dashboard(Request $request)
 	{
 		return view('dashboard');
@@ -36,11 +49,6 @@ class HomeController extends Controller
     public function sources(Request $request)
     {
         return view('sources');
-    }
-
-    public function unauth(Request $request)
-    {
-        return view('lockscreen');
     }
 
     public function about(Request $request)

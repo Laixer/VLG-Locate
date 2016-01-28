@@ -38,7 +38,7 @@
                                 <td>{{ $list->name }}</td>
                                 <td>{{ $list->isAvailable() ? '-' : $list->location->name }}</td>
                                 <td class="text-right">
-                                    @if ($list->isAvailable())
+                                    @if ($list->isAvailable() && Auth::user()->canWrite())
                                     <div class="btn-group">
                                         <a href="{{ url('/source/delete') . '?id=' . $list->id --}}" class="btn-danger btn btn-xs no-margins">Verwijderen</a>
                                     </div>

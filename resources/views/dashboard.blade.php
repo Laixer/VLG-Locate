@@ -59,9 +59,11 @@
                                 <td>{{ $list->data_requested ? 'Ja' : 'Nee' }}</td>
                                 <td>{{ $list->note }}</td>
                                 <td class="text-right">
+                                    @if (Auth::user()->canWrite())
                                     <div class="btn-group">
                                         <a href="{{ url('/project/edit') . '?id=' . $list->id }}" class="btn-white btn btn-xs no-margins">Bewerk</a>
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
