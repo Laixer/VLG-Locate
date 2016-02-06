@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.rotterdam-vlg.com/">
+                                <a href="https://portal.rotterdam-vlg.com/">
                                     <i class="fa fa-sign-out"></i> Portal
                                 </a>
                             </li>
@@ -61,7 +61,7 @@
             @yield('content')
 
             <div class="footer">
-                <div class="pull-right">Versie {{ config('app.appver') }}</div>
+                <div class="pull-right">Versie {{ App\QuickGit::version_short() }}</div>
                 <div>
                     <strong>Copyright</strong> Veldmeetdienst & Laboaratorium Groep &copy; {{ date('Y') }}
                 </div>
