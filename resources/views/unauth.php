@@ -34,7 +34,7 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <a href="https://www.rotterdam-vlg.com/" class="btn btn-primary block full-width m-b">Terug naar Portal</a>
+                            <a href="https://portal.rotterdam-vlg.com/" class="btn btn-primary block full-width m-b">Terug naar Portal</a>
                         </div>
                     </div>
                 </div>

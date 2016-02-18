@@ -21,7 +21,7 @@
 
     <div class="middle-box text-center">
         <h1>503</h1>
-        <h3 class="font-bold">Portal down</h3>
+        <h3 class="font-bold">Applicatie down</h3>
 
         <div class="error-desc">
             Deze applicatie is tijdelijk niet beschikbaar, probeer later nog eens.
