@@ -33,7 +33,7 @@
                         <ul class="nav navbar-nav">
 
                             <li class="{{ $nav == 'dashboard' ? 'active' : '' }}">
-                                <a aria-expanded="false" role="button" href="{{ url('/') }}"> Projecten</a>
+                                <a aria-expanded="false" role="button" href="{{ url('/') }}"> Locaties</a>
                             </li>
                             <li class="{{ $nav == 'sources' ? 'active' : '' }}">
                                 <a aria-expanded="false" role="button" href="{{ url('/sources') }}"> Opnemers</a>

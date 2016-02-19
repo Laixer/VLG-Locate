@@ -20,7 +20,7 @@
                         @if (Auth::user()->canWrite())
                         <div class="col-sm-4 text-right">
                             <a href="{{ url('/source/new') }}" class="btn btn-primary ">Nieuwe opnemer</a>
-                            <a href="{{ url('/project/new') }}" class="btn btn-primary ">Nieuw project</a>
+                            <a href="{{ url('/project/new') }}" class="btn btn-primary ">Nieuwe locatie</a>
                         </div>
                         @endif
                     </div>

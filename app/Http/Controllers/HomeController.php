@@ -193,7 +193,7 @@ class HomeController extends Controller
     public function doSourceNew(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:sources',
         ]);
 
         $source = new Source;

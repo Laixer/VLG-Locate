@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'Nieuw project')
+@section('title', 'Nieuwe locatie')
 
 @section('content')
 <div class="wrapper wrapper-content">
@@ -18,7 +18,7 @@
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Nieuw project</h5>
+                    <h5>Nieuwe locatie</h5>
                 </div>
                 <div class="ibox-content">
                     <form method="post" action="{{ url('/project/new') }}" class="form-horizontal">
@@ -28,6 +28,19 @@
                             <div class="col-sm-10"><input type="text" class="form-control" name="number" placeholder="Projectnummer" value="{{ old('number') }}">
                                 @if ($errors->has('number'))
                                 <span class="help-block m-b-none">{{ $errors->first('number') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group {{ $errors->has('source') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Opnemer <span style="color: #C10000;">*</span></label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="source">
+                                    <option>Selecteer</option>
+                                    @foreach(App\Source::available() as $source)
+                                    <option value="{{ $source->id }}">{{ $source->name }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('source'))
+                                <span class="help-block m-b-none">{{ $errors->first('source') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -101,21 +114,6 @@
                         <div class="form-group"><label class="col-sm-2 control-label">Telefoon</label>
                             <div class="col-sm-10"><input type="text" name="phone" placeholder="Telefoon" class="form-control" value="{{ old('phone') }}"></div>
                         </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group {{ $errors->has('source') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Opnemer <span style="color: #C10000;">*</span></label>
-                            <div class="col-sm-10">
-                                <select class="form-control m-b" name="source">
-                                    <option>Selecteer</option>
-                                    @foreach(App\Source::available() as $source)
-                                    <option value="{{ $source->id }}">{{ $source->name }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('source'))
-                                <span class="help-block m-b-none">{{ $errors->first('source') }}</span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="hr-line-dashed"></div>
                         <div class="form-group"><label class="col-sm-2 control-label">Opmerking</label>
                             <div class="col-sm-10"><input type="text" name="note" class="form-control" placeholder="Opmerking" value="{{ old('note') }}"></div>
