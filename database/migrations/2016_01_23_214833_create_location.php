@@ -24,9 +24,12 @@ class CreateLocation extends Migration
             $table->string('name', 100);
             $table->string('address', 100);
             $table->string('address_number', 4);
+            $table->double('address_lat', 10, 8);
+            $table->double('address_long', 10, 8);
             $table->string('postal', 6);
             $table->string('city', 50);
             $table->date('placed_at');
+            $table->date('planned_till');
             $table->date('removed_at')->nullable();
             $table->string('contact_name', 60);
             $table->string('phone', 15);

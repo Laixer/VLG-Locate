@@ -38,6 +38,9 @@
                             <li class="{{ $nav == 'sources' ? 'active' : '' }}">
                                 <a aria-expanded="false" role="button" href="{{ url('/sources') }}"> Opnemers</a>
                             </li>
+                            <li class="{{ $nav == 'map' ? 'active' : '' }}">
+                                <a aria-expanded="false" role="button" href="{{ url('/map') }}"> Kaart</a>
+                            </li>
 
                         </ul>
 

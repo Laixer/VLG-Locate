@@ -5,6 +5,16 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Location;
 use App\Source;
+
+use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Helper\MapHelper;
+use Ivory\GoogleMap\Events\MouseEvent;
+use Ivory\GoogleMap\Overlays\Marker;
+use Ivory\GoogleMap\Overlays\InfoWindow;
+
+use Ivory\HttpAdapter\Guzzle6HttpAdapter;
+use Geocoder\Provider\GoogleMaps;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use VLG\GSSAuth\Hello;
@@ -29,6 +39,26 @@ class HomeController extends Controller
 	{
 		return view('dashboard');
 	}
+
+    public function map(Request $request)
+    {
+        $map = new Map();
+        $map->setStylesheetOption('width', '100%');
+        $map->setStylesheetOption('height', '450px');
+        $map->setLanguage('nl');
+        $map->setCenter(51.9360628, 4.430924, true);
+        $map->setMapOption('zoom', 11);
+
+        foreach(Location::all() as $location) {
+            $marker = new Marker();
+            $marker->setPosition($location->address_lat, $location->address_long, true);
+
+            $marker->setInfoWindow(new InfoWindow('<h4>'  . $location->source->name . '</h4><p>Project: ' . $location->name . '<br />' . $location->address . ' ' . $location->address_number . ', ' . $location->city . '<br />' . $location->contact_name . '<br />' . $location->phone . '</p>'));
+            $map->addMarker($marker);
+        }
+
+        return view('map', ['map' => $map, 'helper' => new MapHelper()]);
+    }
 
 	public function projectNew(Request $request)
 	{
@@ -109,6 +139,7 @@ class HomeController extends Controller
 
         if ($request->input('removed'))
             $location->removed_at = $request->input('removed');
+        $location->planned_till = date('Y-M-D');
 
         if ($request->input('phone'))
             $location->phone = $request->input('phone');
@@ -125,6 +156,15 @@ class HomeController extends Controller
             $location->data_requested = true;
         else
         	$location->data_requested = false;
+
+        $geocoder = new GoogleMaps(new Guzzle6HttpAdapter());
+        $response = $geocoder->geocode($location->address . ' ' . $location->address_number . ', ' . $location->city . ', ' . $location->postal . ', Nederland');
+
+        if ($response->count() == 0)
+            return back()->withInput()->with('error', 'Adres niet gevonden');
+
+        $location->address_lat = $response->first()->getLatitude();
+        $location->address_long = $response->first()->getLongitude();
 
         $location->save();
 
