@@ -119,7 +119,7 @@
                             <div class="col-sm-10"><input type="text" name="note" class="form-control" placeholder="Opmerking" value="{{ old('note') }}"></div>
                         </div>
                         <div class="form-group"><label class="col-sm-2 control-label">Overig</label>
-                            <div class="col-sm-10 checkbox-inline">
+                            <div class="col-sm-10" style="padding-top: 7px;">
                                 <div class="i-checks"><label> <input type="checkbox" name="data_requested"> <i></i> Data opgevraagd </label></div>
                             </div>
                         </div>
