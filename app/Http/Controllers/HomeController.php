@@ -49,7 +49,7 @@ class HomeController extends Controller
         $map->setCenter(51.9360628, 4.430924, true);
         $map->setMapOption('zoom', 11);
 
-        foreach(Location::all() as $location) {
+        foreach(Location::where('active', true)->get() as $location) {
             $marker = new Marker();
             $marker->setPosition($location->address_lat, $location->address_long, true);
 
@@ -225,7 +225,9 @@ class HomeController extends Controller
 
     public function projectDelete(Request $request)
     {
-        Location::destroy($request->input('id'));
+        $location = Location::find($request->input('id'));
+        $location->active = false;
+        $location->save();
 
         return redirect('/')->with('success', 'Project verwijderd');
     }

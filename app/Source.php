@@ -9,7 +9,7 @@ class Source extends Model
 {
 	public static function available() {
 		$used = array();
-		foreach (Location::all() as $key) {
+		foreach (Location::where('active', true)->get() as $key) {
 			array_push($used, $key->source_id);
 		}
 
@@ -17,7 +17,7 @@ class Source extends Model
 	}
 
 	public function isAvailable() {
-		if (\App\Location::where('source_id', $this->id)->count() > 0) {
+		if (\App\Location::where(['source_id' => $this->id, 'active' => true])->count() > 0) {
 			return false;
 		}
 

@@ -9,6 +9,13 @@
 
     <div class="row">
         <div class="col-lg-12">
+
+            @if (session('success'))
+            <div class="alert alert-success" role="alert">
+              {{ session('success') }}
+            </div>
+            @endif
+
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Projecten</h5>
@@ -44,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(App\Location::all() as $list)
+                            @foreach(App\Location::where('active', true)->get() as $list)
                             <tr>
                                 <td>{{ $list->number }}</td>
                                 <td>{{ $list->name }}</td>

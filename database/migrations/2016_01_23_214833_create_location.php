@@ -35,6 +35,7 @@ class CreateLocation extends Migration
             $table->string('phone', 15);
             $table->string('email', 120);
             $table->boolean('data_requested', 8);
+            $table->boolean('active')->default(1);
             $table->text('note')->nullable();
             $table->timestamps();
             $table->integer('source_id')->unsigned()->nullable();
