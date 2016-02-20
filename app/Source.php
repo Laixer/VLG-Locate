@@ -17,7 +17,12 @@ class Source extends Model
 	}
 
 	public function isAvailable() {
-		if (\App\Location::where('source_id', $this->id)->whereNull('removed_at')->orWhere('removed_at', '>', date('Y-m-d'))->count() > 0) {
+		$used = array();
+		foreach (Location::whereNull('removed_at')->orWhere('removed_at', '>', date('Y-m-d'))->get() as $key) {
+			array_push($used, $key->source_id);
+		}
+
+		if (in_array($this->id, $used)) {
 			return false;
 		}
 

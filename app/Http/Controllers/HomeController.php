@@ -45,6 +45,35 @@ class HomeController extends Controller
         return view('board');
     }
 
+    public function boardSource(Request $request)
+    {
+        $colorClass = ['ganttRed', 'ganttGreen', 'ganttOrange', 'ganttBlue'];
+
+        $arr = [];
+        $i = 0;
+        foreach(Source::all() as $list) {
+            $val_arr = [];
+            foreach($list->location()->get() as $location) {
+                $value = array(
+                    'from' => date('r', strtotime($location->placed_at)),
+                    'to' => date('r', strtotime($location->planned_till)),
+                    'label' => $location->name,
+                    'customClass' => $colorClass[$i % count($colorClass)],
+                );
+                array_push($val_arr, $value);
+            }
+
+            $source = array(
+                'name' => $list->name,
+                'values' => $val_arr,
+            );
+            array_push($arr, $source);
+            $i++;
+        }
+
+        return response()->json($arr);
+    }
+
     public function map(Request $request)
     {
         $map = new Map();

@@ -36,7 +36,7 @@
                             @foreach(App\Source::all() as $list)
                             <tr>
                                 <td>{{ $list->name }}</td>
-                                <td>{{ $list->isAvailable() ? '-' : $list->location()->first()->name }}</td>
+                                <td>{{ $list->isAvailable() ? '-' : $list->location()->orderBy('placed_at','desc')->first()->name }}</td>
                                 <td class="text-right">
                                     @if ($list->isAvailable() && Auth::user()->canWrite())
                                     <div class="btn-group">

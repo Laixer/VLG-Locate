@@ -33,6 +33,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/sources', 'HomeController@sources');
 	Route::get('/map', 'HomeController@map');
 	Route::get('/board', 'HomeController@board');
+	Route::get('/board/source', 'HomeController@boardSource');
 	Route::get('/principal', 'HomeController@about');
 });
 
