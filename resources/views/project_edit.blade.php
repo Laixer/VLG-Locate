@@ -18,7 +18,7 @@
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Project {{ $location->name }}</h5>
+                    <h5>Locatie {{ $location->name }}</h5>
                 </div>
                 <div class="ibox-content">
                     <form method="post" action="{{ url('/project/update') }}" class="form-horizontal">
@@ -122,7 +122,7 @@
                             <div class="col-sm-10"><input type="text" name="note" class="form-control" placeholder="Opmerking" value="{{ $location->note }}"></div>
                         </div>
                         <div class="form-group"><label class="col-sm-2 control-label">Overig</label>
-                            <div class="col-sm-10 checkbox-inline">
+                            <div class="col-sm-10" style="padding-top: 7px;">
                                 <div class="i-checks"><label> <input type="checkbox" {{ $location->data_requested ? 'checked' : '' }} name="data_requested"> <i></i> Data opgevraagd </label></div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
                                 <button class="btn btn-primary" type="submit">Opslaan</button>
-                                <a href="{{ url('/project/delete') . '?id=' . $location->id }}" class="btn btn-danger" type="submit">Verwijderen</a>
+                                <!-- <a href="{{ url('/project/delete') . '?id=' . $location->id }}" class="btn btn-danger" type="submit">Verwijderen</a> -->
                             </div>
                         </div>
 

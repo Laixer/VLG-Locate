@@ -32,13 +32,13 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/', 'HomeController@dashboard');
 	Route::get('/sources', 'HomeController@sources');
 	Route::get('/map', 'HomeController@map');
+	Route::get('/board', 'HomeController@board');
 	Route::get('/principal', 'HomeController@about');
 });
 
 Route::group(['middleware' => ['web', 'auth.edit']], function () {
 	Route::get('/project/new', 'HomeController@projectNew');
 	Route::get('/project/edit', 'HomeController@projectEdit');
-	Route::get('/project/delete', 'HomeController@projectDelete');
 	Route::get('/source/new', 'HomeController@sourceNew');
 	Route::get('/source/delete', 'HomeController@sourceDelete');
 	Route::post('/project/new', 'HomeController@doProjectNew');

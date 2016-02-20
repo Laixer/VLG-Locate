@@ -18,7 +18,7 @@
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Projecten</h5>
+                    <h5>Locaties</h5>
                 </div>
                 <div class="ibox-content">
 
@@ -51,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(App\Location::where('active', true)->get() as $list)
+                            @foreach(App\Location::all() as $list)
                             <tr>
                                 <td>{{ $list->number }}</td>
                                 <td>{{ $list->name }}</td>

@@ -40,6 +40,11 @@ class HomeController extends Controller
 		return view('dashboard');
 	}
 
+    public function board(Request $request)
+    {
+        return view('board');
+    }
+
     public function map(Request $request)
     {
         $map = new Map();
@@ -49,7 +54,7 @@ class HomeController extends Controller
         $map->setCenter(51.9360628, 4.430924, true);
         $map->setMapOption('zoom', 11);
 
-        foreach(Location::where('active', true)->get() as $location) {
+        foreach(Location::all() as $location) {
             $marker = new Marker();
             $marker->setPosition($location->address_lat, $location->address_long, true);
 
@@ -114,9 +119,10 @@ class HomeController extends Controller
 	public function doProjectNew(Request $request)
 	{
         $this->validate($request, [
-            'number' => 'required|unique:locations',
+            'number' => 'required',
             'name' => 'required',
             'placed' => 'required',
+            'till' => 'required',
             'address' => 'required',
             'address_number' => 'required',
             'postal' => 'required',
@@ -130,6 +136,7 @@ class HomeController extends Controller
         $location->number = $request->input('number');
         $location->name = $request->input('name');
         $location->placed_at = $request->input('placed');
+        $location->planned_till = $request->input('till');
         $location->address = $request->input('address');
         $location->address_number = $request->input('address_number');
         $location->postal = $request->input('postal');
@@ -139,7 +146,6 @@ class HomeController extends Controller
 
         if ($request->input('removed'))
             $location->removed_at = $request->input('removed');
-        $location->planned_till = date('Y-M-D');
 
         if ($request->input('phone'))
             $location->phone = $request->input('phone');
@@ -218,18 +224,18 @@ class HomeController extends Controller
         else
             $location->data_requested = false;
 
+        $geocoder = new GoogleMaps(new Guzzle6HttpAdapter());
+        $response = $geocoder->geocode($location->address . ' ' . $location->address_number . ', ' . $location->city . ', ' . $location->postal . ', Nederland');
+
+        if ($response->count() == 0)
+            return back()->withInput()->with('error', 'Adres niet gevonden');
+
+        $location->address_lat = $response->first()->getLatitude();
+        $location->address_long = $response->first()->getLongitude();
+
         $location->save();
 
         return back()->with('success', 'Project opgeslagen');
-    }
-
-    public function projectDelete(Request $request)
-    {
-        $location = Location::find($request->input('id'));
-        $location->active = false;
-        $location->save();
-
-        return redirect('/')->with('success', 'Project verwijderd');
     }
 
     public function doSourceNew(Request $request)

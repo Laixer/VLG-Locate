@@ -9,7 +9,7 @@ class Source extends Model
 {
 	public static function available() {
 		$used = array();
-		foreach (Location::where('active', true)->get() as $key) {
+		foreach (Location::whereNull('removed_at')->orWhere('removed_at', '>', date('Y-m-d'))->get() as $key) {
 			array_push($used, $key->source_id);
 		}
 
@@ -17,7 +17,7 @@ class Source extends Model
 	}
 
 	public function isAvailable() {
-		if (\App\Location::where(['source_id' => $this->id, 'active' => true])->count() > 0) {
+		if (\App\Location::where('source_id', $this->id)->whereNull('removed_at')->orWhere('removed_at', '>', date('Y-m-d'))->count() > 0) {
 			return false;
 		}
 
@@ -29,7 +29,7 @@ class Source extends Model
      */
     public function location()
     {
-        return $this->hasOne('App\Location');
+        return $this->hasMany('App\Location');
     }
 
 }

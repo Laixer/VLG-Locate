@@ -20,7 +20,7 @@ class CreateLocation extends Migration
 
         Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('number', 10)->unique();
+            $table->string('number', 10);
             $table->string('name', 100);
             $table->string('address', 100);
             $table->string('address_number', 4);
@@ -35,7 +35,6 @@ class CreateLocation extends Migration
             $table->string('phone', 15);
             $table->string('email', 120);
             $table->boolean('data_requested', 8);
-            $table->boolean('active')->default(1);
             $table->text('note')->nullable();
             $table->timestamps();
             $table->integer('source_id')->unsigned()->nullable();
