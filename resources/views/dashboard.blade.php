@@ -57,8 +57,8 @@
                                 <td>{{ $list->source->name }}</td>
                                 <td>{{ $list->address . ' ' . $list->address_number }}</td>
                                 <td>{{ $list->postal }}</td>
-                                <td>{{ $list->placed_at }}</td>
-                                <td>{{ $list->removed_at }}</td>
+                                <td>{{ date('d-m-Y', strtotime($list->placed_at)) }}</td>
+                                <td>{{ date('d-m-Y', strtotime($list->removed_at)) }}</td>
                                 <td>{{ $list->contact_name }}</td>
                                 <td>{{ $list->phone }}</td>
                                 <td>{{ $list->email }}</td>
