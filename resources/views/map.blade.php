@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Map</h5>
+                    <h5>Kaart</h5>
                 </div>
                 <div class="ibox-content">{!! $helper->renderHtmlContainer($map) !!}</div>
             </div>

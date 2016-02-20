@@ -42,7 +42,7 @@
                                 <a aria-expanded="false" role="button" href="{{ url('/map') }}"> Kaart</a>
                             </li>
                             <li class="{{ $nav == 'board' ? 'active' : '' }}">
-                                <a aria-expanded="false" role="button" href="{{ url('/board') }}"> Planboard</a>
+                                <a aria-expanded="false" role="button" href="{{ url('/board') }}"> Planing</a>
                             </li>
 
                         </ul>
@@ -107,7 +107,7 @@
                     scale: "weeks",
                     maxScale: "months",
                     minScale: "hours",
-                    itemsPerPage: 10,
+                    itemsPerPage: 30,
                     useCookie: true,
                     onItemClick: function(data) {
                         window.location.href = "/project/edit?id=" + data;
