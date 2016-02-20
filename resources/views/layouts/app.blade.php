@@ -42,7 +42,7 @@
                                 <a aria-expanded="false" role="button" href="{{ url('/map') }}"> Kaart</a>
                             </li>
                             <li class="{{ $nav == 'board' ? 'active' : '' }}">
-                                <a aria-expanded="false" role="button" href="{{ url('/board') }}"> Planing</a>
+                                <a aria-expanded="false" role="button" href="{{ url('/board') }}"> Planning</a>
                             </li>
 
                         </ul>

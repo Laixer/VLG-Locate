@@ -8,7 +8,6 @@ use App\Source;
 
 use Ivory\GoogleMap\Map;
 use Ivory\GoogleMap\Helper\MapHelper;
-use Ivory\GoogleMap\Events\MouseEvent;
 use Ivory\GoogleMap\Overlays\Marker;
 use Ivory\GoogleMap\Overlays\InfoWindow;
 
@@ -87,6 +86,11 @@ class HomeController extends Controller
         foreach(Location::all() as $location) {
             $marker = new Marker();
             $marker->setPosition($location->address_lat, $location->address_long, true);
+            if ($location->isAvailable()) {
+                $marker->setIcon('/img/green-dot.png');
+            } else {
+                $marker->setIcon('/img/red-dot.png');
+            }
 
             $marker->setInfoWindow(new InfoWindow('<h4>'  . $location->source->name . '</h4><p>Project: ' . $location->name . '<br />' . $location->address . ' ' . $location->address_number . ', ' . $location->city . '<br />' . $location->contact_name . '<br />' . $location->phone . '</p>'));
             $map->addMarker($marker);
