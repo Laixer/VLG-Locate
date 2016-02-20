@@ -59,6 +59,7 @@ class HomeController extends Controller
                     'to' => date('r', strtotime($location->planned_till)),
                     'label' => $location->name,
                     'customClass' => $colorClass[$i % count($colorClass)],
+                    'dataObj' => $location->id,
                 );
                 array_push($val_arr, $value);
             }
