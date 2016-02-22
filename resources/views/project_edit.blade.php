@@ -32,6 +32,19 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group {{ $errors->has('source') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Opnemer <span style="color: #C10000;">*</span></label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="source">
+                                    <option id="0" selected>{{ $location->source->name }}</option>
+                                    @foreach(App\Source::available() as $source)
+                                    <option value="{{ $source->id }}">{{ $source->name }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('source'))
+                                <span class="help-block m-b-none">{{ $errors->first('source') }}</span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group {{ $errors->has('name') || $errors->has('last_name') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Naam <span style="color: #C10000;">*</span></label>
                             <div class="col-sm-10"><input type="text" class="form-control" name="name" placeholder="Projectnaam" value="{{ $location->name }}">
                                 @if ($errors->has('name'))
@@ -109,21 +122,6 @@
                         <div class="form-group"><label class="col-sm-2 control-label">Telefoon</label>
                             <div class="col-sm-10"><input type="text" name="phone" placeholder="Telefoon" class="form-control" value="{{ $location->phone }}"></div>
                         </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group {{ $errors->has('source') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Opnemer <span style="color: #C10000;">*</span></label>
-                            <div class="col-sm-10">
-                                <select class="form-control m-b" name="source">
-                                    <option id="0" selected>{{ $location->source->name }}</option>
-                                    @foreach(App\Source::available() as $source)
-                                    <option value="{{ $source->id }}">{{ $source->name }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('source'))
-                                <span class="help-block m-b-none">{{ $errors->first('source') }}</span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="hr-line-dashed"></div>
                         <div class="form-group"><label class="col-sm-2 control-label">Opmerking</label>
                             <div class="col-sm-10"><input type="text" name="note" class="form-control" placeholder="Opmerking" value="{{ $location->note }}"></div>
