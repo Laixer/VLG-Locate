@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('source') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Opnemer <span style="color: #C10000;">*</span></label>
                             <div class="col-sm-10">
-                                <select class="form-control m-b" name="source">
+                                <select class="form-control" name="source">
                                     <option id="0" selected>{{ $location->source->name }}</option>
                                     @foreach(App\Source::available() as $source)
                                     <option value="{{ $source->id }}">{{ $source->name }}</option>
