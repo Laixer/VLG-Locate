@@ -218,6 +218,7 @@ class HomeController extends Controller
             'number' => 'required',
             'name' => 'required',
             'placed' => 'required',
+            'till' => 'required',
             'address' => 'required',
             'address_number' => 'required',
             'postal' => 'required',
@@ -230,6 +231,7 @@ class HomeController extends Controller
         $location->number = $request->input('number');
         $location->name = $request->input('name');
         $location->placed_at = $request->input('placed');
+        $location->planned_till = $request->input('till');
         $location->address = $request->input('address');
         $location->address_number = $request->input('address_number');
         $location->postal = $request->input('postal');
