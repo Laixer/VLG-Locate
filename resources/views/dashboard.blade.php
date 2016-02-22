@@ -24,11 +24,12 @@
 
                     <div class="row">
                         <div class="col-sm-8"></div>
-                        @if (Auth::user()->canWrite())
                         <div class="col-sm-4 text-right">
-                            <a href="{{ url('/project/new') }}" class="btn btn-primary ">Nieuwe locatie</a>
+                            <a href="{{ url('/?all=true') }}" class="btn btn-white ">Alle locaties</a>
+                            @if (Auth::user()->canWrite())
+                             <a href="{{ url('/project/new') }}" class="btn btn-primary ">Nieuwe locatie</a>
+                            @endif
                         </div>
-                        @endif
                     </div>
 
                     <table class="footable table table-stripped" style="margin-top:20px;" data-page-size="10" data-filter=#filter>
@@ -50,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(App\Location::all() as $list)
+                            @foreach(App\Location::available($all) as $list)
                             <tr>
                                 <td>{{ $list->number }}</td>
                                 <td>{{ $list->name }}</td>
@@ -58,7 +59,7 @@
                                 <td>{{ $list->address . ' ' . $list->address_number }}</td>
                                 <td>{{ $list->postal }}</td>
                                 <td>{{ date('d-m-Y', strtotime($list->placed_at)) }}</td>
-                                <td>{{ date('d-m-Y', strtotime($list->removed_at)) }}</td>
+                                <td>{{ $list->removed_at ? date('d-m-Y', strtotime($list->removed_at)) : '-' }}</td>
                                 <td>{{ $list->contact_name }}</td>
                                 <td>{{ $list->phone }}</td>
                                 <td>{{ $list->email }}</td>

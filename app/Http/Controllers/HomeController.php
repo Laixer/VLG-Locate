@@ -36,7 +36,7 @@ class HomeController extends Controller
 
 	public function dashboard(Request $request)
 	{
-		return view('dashboard');
+        return view('dashboard', ['all' => $request->get('all')]);
 	}
 
     public function board(Request $request)

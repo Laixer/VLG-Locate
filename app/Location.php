@@ -24,4 +24,11 @@ class Location extends Model
 
 		return false;
 	}
+
+	public static function available($all = false) {
+		if ($all)
+			return self::all();
+		return self::whereNull('removed_at')->orWhere('removed_at','>',date('Y-m-d'))->get();
+	}
+
 }
