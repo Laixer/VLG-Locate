@@ -14,6 +14,8 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/plugins/footable/footable.core.css" rel="stylesheet">
     <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 
 </head>
 
@@ -44,6 +46,11 @@
                             <li class="{{ $nav == 'board' ? 'active' : '' }}">
                                 <a aria-expanded="false" role="button" href="{{ url('/board') }}"> Planning</a>
                             </li>
+                            @if (Auth::user()->canWrite())
+                            <li class="{{ $nav == 'notepad' ? 'active' : '' }}">
+                                <a aria-expanded="false" role="button" href="{{ url('/notepad') }}"> Kladblok</a>
+                            </li>
+                            @endif
 
                         </ul>
 
@@ -84,6 +91,7 @@
     {{-- Custom and plugin javascript --}}
     <script src="/js/portal.js"></script>
     <script src="/js/plugins/pace/pace.min.js"></script>
+    <script src="/js/plugins/summernote/summernote.min.js"></script>
 
     {{-- FooTable --}}
     <script src="/js/plugins/footable/footable.all.min.js"></script>
@@ -94,6 +102,8 @@
 
     <script>
         $(document).ready(function() {
+
+            $('.summernote').summernote();
 
             $('.footable').footable();
 

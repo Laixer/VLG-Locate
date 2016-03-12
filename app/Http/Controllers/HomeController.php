@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Storage;
 use App\Location;
 use App\Source;
 
@@ -42,6 +43,15 @@ class HomeController extends Controller
     public function board(Request $request)
     {
         return view('board');
+    }
+
+    public function notepad(Request $request)
+    {
+        $notepad = null;
+        if (Storage::has('notepad.txt'))
+            $notepad = Storage::get('notepad.txt');
+
+        return view('notepad', ['notepad' => $notepad]);
     }
 
     public function boardSource(Request $request)
@@ -286,6 +296,58 @@ class HomeController extends Controller
         $source->save();
 
         return back()->with('success', 'Opnemer toegevoegd');
+    }
+
+    public function doNotepadUpdate(Request $request)
+    {
+        if ($request->input('notepad')) {
+            Storage::put('notepad.txt', $request->input('notepad'));
+        }
+        // $location = Location::find($request->input('id'));
+        // $location->number = $request->input('number');
+        // $location->name = $request->input('name');
+        // $location->placed_at = $request->input('placed');
+        // $location->planned_till = $request->input('till');
+        // $location->address = $request->input('address');
+        // $location->address_number = $request->input('address_number');
+        // $location->postal = $request->input('postal');
+        // $location->city = $request->input('city');
+        // $location->contact_name = $request->input('contact');
+        // $location->email = $request->input('email');
+
+        // if ($request->input('removed'))
+        //     $location->removed_at = $request->input('removed');
+
+        // if ($request->input('phone'))
+        //     $location->phone = $request->input('phone');
+
+        // if ($request->input('note'))
+        //     $location->note = $request->input('note');
+
+        // if ($request->input('source') > 0) {
+        //     if (!Source::find($request->input('source'))->isAvailable()) {
+        //         return back();
+        //     }
+        //     $location->source_id = $request->input('source');
+        // }
+
+        // if ($request->input('data_requested'))
+        //     $location->data_requested = true;
+        // else
+        //     $location->data_requested = false;
+
+        // $geocoder = new GoogleMaps(new Guzzle6HttpAdapter());
+        // $response = $geocoder->geocode($location->address . ' ' . $location->address_number . ', ' . $location->city . ', ' . $location->postal . ', Nederland');
+
+        // if ($response->count() == 0)
+        //     return back()->withInput()->with('error', 'Adres niet gevonden');
+
+        // $location->address_lat = $response->first()->getLatitude();
+        // $location->address_long = $response->first()->getLongitude();
+
+        // $location->save();
+
+        return back()->with('success', 'Notepad opgeslagen');
     }
 
 }

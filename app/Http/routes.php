@@ -42,7 +42,9 @@ Route::group(['middleware' => ['web', 'auth.edit']], function () {
 	Route::get('/project/edit', 'HomeController@projectEdit');
 	Route::get('/source/new', 'HomeController@sourceNew');
 	Route::get('/source/delete', 'HomeController@sourceDelete');
+	Route::get('/notepad', 'HomeController@notepad');
 	Route::post('/project/new', 'HomeController@doProjectNew');
 	Route::post('/project/update', 'HomeController@doProjectUpdate');
 	Route::post('/source/new', 'HomeController@doSourceNew');
+	Route::post('/notepad/update', 'HomeController@doNotepadUpdate');
 });
