@@ -14,7 +14,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "guzzlehttp/guzzle": "~5.0|~6.0",
-        "egeloen/google-map": "dev-master",
+        "egeloen/google-map": "1.4.*",
         "willdurand/geocoder": "*",
         "vlg/gssauth": "dev-master"
     },
