@@ -48,10 +48,24 @@ class HomeController extends Controller
     public function notepad(Request $request)
     {
         $notepad = null;
-        if (Storage::has('notepad.txt'))
-            $notepad = Storage::get('notepad.txt');
+        if ($request->has('id')) {
+            $location = Location::find($request->input('id'));
+            if ($location) {
+                return view('notepad', [
+                    'notepad' => $location->notepad,
+                    'saveto' => '/notepad/update?id=' . $location->id,
+                ]);
+            }
+        }
 
-        return view('notepad', ['notepad' => $notepad]);
+        if (Storage::has('notepad.txt')) {
+            $notepad = Storage::get('notepad.txt');
+        }
+
+        return view('notepad', [
+            'notepad' => $notepad,
+            'saveto' => '/notepad/update',
+        ]);
     }
 
     public function boardSource(Request $request)
@@ -70,6 +84,9 @@ class HomeController extends Controller
                     'customClass' => $colorClass[$i % count($colorClass)],
                     'dataObj' => $location->id,
                 );
+                if ($location->removed_at) {
+                    $value['to'] = date('r', strtotime($location->removed_at));
+                }
                 array_push($val_arr, $value);
             }
 
@@ -172,7 +189,7 @@ class HomeController extends Controller
             'postal' => 'required',
             'city' => 'required',
             'contact' => 'required',
-            'email' => 'required|email',
+            'email' => 'email',
             'source' => 'required|numeric',
         ]);
 
@@ -234,7 +251,7 @@ class HomeController extends Controller
             'postal' => 'required',
             'city' => 'required',
             'contact' => 'required',
-            'email' => 'required|email',
+            'email' => 'email',
         ]);
 
         $location = Location::find($request->input('id'));
@@ -251,6 +268,8 @@ class HomeController extends Controller
 
         if ($request->input('removed'))
             $location->removed_at = $request->input('removed');
+        else
+            $location->removed_at = null;
 
         if ($request->input('phone'))
             $location->phone = $request->input('phone');
@@ -300,52 +319,19 @@ class HomeController extends Controller
 
     public function doNotepadUpdate(Request $request)
     {
+        if ($request->has('id')) {
+            $location = Location::find($request->input('id'));
+            if ($location) {
+                $location->notepad = $request->input('notepad');
+                $location->save();
+
+                return back()->with('success', 'Notepad opgeslagen bij project');
+            }
+        }
+
         if ($request->input('notepad')) {
             Storage::put('notepad.txt', $request->input('notepad'));
         }
-        // $location = Location::find($request->input('id'));
-        // $location->number = $request->input('number');
-        // $location->name = $request->input('name');
-        // $location->placed_at = $request->input('placed');
-        // $location->planned_till = $request->input('till');
-        // $location->address = $request->input('address');
-        // $location->address_number = $request->input('address_number');
-        // $location->postal = $request->input('postal');
-        // $location->city = $request->input('city');
-        // $location->contact_name = $request->input('contact');
-        // $location->email = $request->input('email');
-
-        // if ($request->input('removed'))
-        //     $location->removed_at = $request->input('removed');
-
-        // if ($request->input('phone'))
-        //     $location->phone = $request->input('phone');
-
-        // if ($request->input('note'))
-        //     $location->note = $request->input('note');
-
-        // if ($request->input('source') > 0) {
-        //     if (!Source::find($request->input('source'))->isAvailable()) {
-        //         return back();
-        //     }
-        //     $location->source_id = $request->input('source');
-        // }
-
-        // if ($request->input('data_requested'))
-        //     $location->data_requested = true;
-        // else
-        //     $location->data_requested = false;
-
-        // $geocoder = new GoogleMaps(new Guzzle6HttpAdapter());
-        // $response = $geocoder->geocode($location->address . ' ' . $location->address_number . ', ' . $location->city . ', ' . $location->postal . ', Nederland');
-
-        // if ($response->count() == 0)
-        //     return back()->withInput()->with('error', 'Adres niet gevonden');
-
-        // $location->address_lat = $response->first()->getLatitude();
-        // $location->address_long = $response->first()->getLongitude();
-
-        // $location->save();
 
         return back()->with('success', 'Notepad opgeslagen');
     }

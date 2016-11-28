@@ -46,7 +46,6 @@
                                 <th>Telefoon</th>
                                 <th>Email</th>
                                 <th>Data gevraagd</th>
-                                <th class="text-right" data-sort-ignore="true">Opmerking</th>
                                 <th class="text-right" data-sort-ignore="true"></th>
                             </tr>
                         </thead>
@@ -64,10 +63,10 @@
                                 <td>{{ $list->phone }}</td>
                                 <td>{{ $list->email }}</td>
                                 <td>{{ $list->data_requested ? 'Ja' : 'Nee' }}</td>
-                                <td>{{ $list->note }}</td>
                                 <td class="text-right">
                                     @if (Auth::user()->canWrite())
                                     <div class="btn-group">
+                                        <a href="{{ url('/notepad') . '?id=' . $list->id }}" class="btn-white btn btn-xs no-margins">Kladblok</a>
                                         <a href="{{ url('/project/edit') . '?id=' . $list->id }}" class="btn-white btn btn-xs no-margins">Bewerk</a>
                                     </div>
                                     @endif
@@ -75,13 +74,6 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="13">
-                                    <ul class="pagination pull-right"></ul>
-                                </td>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>

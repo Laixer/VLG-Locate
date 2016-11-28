@@ -61,7 +61,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('till') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Geplanned tot</label>
+                        <div class="form-group {{ $errors->has('till') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Geplanned tot <span style="color: #C10000;">*</span></label>
                             <div class="col-sm-10"><input type="date" name="till" class="form-control" value="{{ $location->planned_till }}">
                                 @if ($errors->has('till'))
                                 <span class="help-block m-b-none">{{ $errors->first('till') }}</span>

@@ -60,7 +60,7 @@ class AuthController extends Controller
     public function handleProviderCallback(Request $request)
     {
         if (!Auth::callback()) {
-            echo 'Oops';
+            abort(500);
         }
 
         return redirect($this->redirectTo);

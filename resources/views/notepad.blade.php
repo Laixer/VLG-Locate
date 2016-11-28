@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="ibox-content no-padding">
-                    <form method="post" action="{{ url('/notepad/update') }}" class="form-horizontal">
+                    <form method="post" action="{{ url($saveto) }}" class="form-horizontal">
                         {!! csrf_field() !!}
                         <textarea name="notepad" class="summernote">
                             {!! $notepad !!}
