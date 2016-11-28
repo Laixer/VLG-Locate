@@ -6,3 +6,4 @@ Homestead.json
 composer.lock
 locate.sublime-project
 locate.sublime-workspace
+*.lock
