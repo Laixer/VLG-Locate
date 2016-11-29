@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-                    <table class="footable table table-stripped" style="margin-top:20px;" data-page-size="10" data-filter=#filter>
+                    <table class="footable table table-stripped" style="margin-top:20px;">
                         <thead>
                             <tr>
                                 <th>Nummer</th>
