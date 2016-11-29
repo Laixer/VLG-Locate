@@ -24,7 +24,7 @@
                         @endif
                     </div>
 
-                    <table class="footable table table-stripped" style="margin-top:20px;">
+                    <table class="footable table table-stripped" style="margin-top:20px;" data-page-size="100">
                         <thead>
                             <tr>
                                 <th data-sort-ignore="true">Naam</th>
