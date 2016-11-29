@@ -14,13 +14,14 @@
                 <div class="ibox-title">
                     <h5>Kaart</h5>
                 </div>
-                <div class="ibox-content">{!! $helper->renderHtmlContainer($map) !!}</div>
+                <div class="ibox-content">{!! $mapHelper->render($map) !!}</div>
             </div>
         </div>
     </div>
 
 </div>
 
-{!! $helper->renderJavascripts($map) !!}
+
+{!! $apiHelper->render([$map]); !!}
 
 @endsection

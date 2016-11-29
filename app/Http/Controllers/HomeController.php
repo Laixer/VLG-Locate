@@ -8,9 +8,13 @@ use App\Location;
 use App\Source;
 
 use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Helper\MapHelper;
-use Ivory\GoogleMap\Overlays\Marker;
-use Ivory\GoogleMap\Overlays\InfoWindow;
+use Ivory\GoogleMap\Overlay\Icon;
+use Ivory\GoogleMap\Overlay\Marker;
+use Ivory\GoogleMap\Overlay\InfoWindow;
+use Ivory\GoogleMap\Helper\Builder\MapHelperBuilder;
+use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 
 use Ivory\HttpAdapter\Guzzle6HttpAdapter;
 use Geocoder\Provider\GoogleMaps;
@@ -103,27 +107,32 @@ class HomeController extends Controller
 
     public function map(Request $request)
     {
+        $apiHelperBuilder = ApiHelperBuilder::create();
+        $apiHelperBuilder->setLanguage('nl');
+        $apiHelperBuilder->setKey(config('services.google.mapskey'));
+        
         $map = new Map();
         $map->setStylesheetOption('width', '100%');
         $map->setStylesheetOption('height', '450px');
-        $map->setLanguage('nl');
-        $map->setCenter(51.9360628, 4.430924, true);
+        $map->setCenter(new Coordinate(51.9360628, 4.430924));
         $map->setMapOption('zoom', 11);
 
         foreach(Location::all() as $location) {
-            $marker = new Marker();
-            $marker->setPosition($location->address_lat, $location->address_long, true);
+            $marker = new Marker(new Coordinate($location->address_lat, $location->address_long) );
             if ($location->isAvailable()) {
-                $marker->setIcon('/img/green-dot.png');
+                $marker->setIcon(new Icon('/img/green-dot.png'));
             } else {
-                $marker->setIcon('/img/red-dot.png');
+                $marker->setIcon(new Icon('/img/red-dot.png'));
             }
 
             $marker->setInfoWindow(new InfoWindow('<h4>'  . $location->source->name . '</h4><p>Project: ' . $location->name . '<br />' . $location->address . ' ' . $location->address_number . ', ' . $location->city . '<br />' . $location->contact_name . '<br />' . $location->phone . '</p>'));
-            $map->addMarker($marker);
+            $map->getOverlayManager()->addMarker($marker);
         }
 
-        return view('map', ['map' => $map, 'helper' => new MapHelper()]);
+        $mapHelper = MapHelperBuilder::create()->build();
+        $apiHelper = $apiHelperBuilder->build();
+
+        return view('map', ['map' => $map, 'mapHelper' => $mapHelper, 'apiHelper' => $apiHelper]);
     }
 
 	public function projectNew(Request $request)

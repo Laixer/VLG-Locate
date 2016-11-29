@@ -35,6 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'mapskey'  => env('GOOGLE_MAPS_KEY'),
+    ],
+
     'vlgportal' => [
         'key'       => env('VLGPORTAL_KEY'),
         'secret'    => env('VLGPORTAL_SECRET'),
