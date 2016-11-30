@@ -112,7 +112,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Email <span style="color: #C10000;">*</span></label>
+                        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}"><label class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10"><input type="email" name="email" class="form-control" placeholder="Email" value="{{ $location->email }}">
                                 @if ($errors->has('email'))
                                 <span class="help-block m-b-none">{{ $errors->first('email') }}</span>

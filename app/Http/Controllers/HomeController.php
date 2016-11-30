@@ -49,29 +49,6 @@ class HomeController extends Controller
         return view('board');
     }
 
-    public function notepad(Request $request)
-    {
-        $notepad = null;
-        if ($request->has('id')) {
-            $location = Location::find($request->input('id'));
-            if ($location) {
-                return view('notepad', [
-                    'notepad' => $location->notepad,
-                    'saveto' => '/notepad/update?id=' . $location->id,
-                ]);
-            }
-        }
-
-        if (Storage::has('notepad.txt')) {
-            $notepad = Storage::get('notepad.txt');
-        }
-
-        return view('notepad', [
-            'notepad' => $notepad,
-            'saveto' => '/notepad/update',
-        ]);
-    }
-
     public function boardSource(Request $request)
     {
         $colorClass = ['ganttRed', 'ganttGreen', 'ganttOrange', 'ganttBlue'];
@@ -282,9 +259,13 @@ class HomeController extends Controller
 
         if ($request->input('phone'))
             $location->phone = $request->input('phone');
+        else
+            $location->phone = null;
 
         if ($request->input('note'))
             $location->note = $request->input('note');
+        else
+            $location->note = null;
 
         if ($request->input('source') > 0) {
             if (!Source::find($request->input('source'))->isAvailable()) {
@@ -326,16 +307,41 @@ class HomeController extends Controller
         return back()->with('success', 'Opnemer toegevoegd');
     }
 
+
+    public function notepad(Request $request)
+    {
+        $notepad = null;
+        if ($request->has('project')) {
+            $notepadfile = base64_encode($request->input('project')) . '_notepad.txt';
+            if (Storage::has($notepadfile)) {
+                $notepad = Storage::get($notepadfile);
+            }
+
+            return view('notepad', [
+                'notepad' => $notepad,
+                'saveto' => '/notepad/update?project=' . $request->input('project'),
+            ]);
+        }
+
+        if (Storage::has('notepad.txt')) {
+            $notepad = Storage::get('notepad.txt');
+        }
+
+        return view('notepad', [
+            'notepad' => $notepad,
+            'saveto' => '/notepad/update',
+        ]);
+    }
+
     public function doNotepadUpdate(Request $request)
     {
-        if ($request->has('id')) {
-            $location = Location::find($request->input('id'));
-            if ($location) {
-                $location->notepad = $request->input('notepad');
-                $location->save();
+        $notepad = null;
+        if ($request->has('project')) {
+            $notepadfile = base64_encode($request->input('project')) . '_notepad.txt';
 
-                return back()->with('success', 'Notepad opgeslagen bij project');
-            }
+            Storage::put($notepadfile, $request->input('notepad'));
+
+            return back()->with('success', 'Notepad opgeslagen bij project');
         }
 
         if ($request->input('notepad')) {

@@ -25,7 +25,11 @@
                     <div class="row">
                         <div class="col-sm-8"></div>
                         <div class="col-sm-4 text-right">
+                            @if ($all)
+                            <a href="{{ url('/') }}" class="btn btn-white ">Huidge locaties</a>
+                            @else
                             <a href="{{ url('/?all=true') }}" class="btn btn-white ">Alle locaties</a>
+                            @endif
                             @if (Auth::user()->canWrite())
                              <a href="{{ url('/project/new') }}" class="btn btn-primary ">Nieuwe locatie</a>
                             @endif
@@ -66,7 +70,7 @@
                                 <td class="text-right">
                                     @if (Auth::user()->canWrite())
                                     <div class="btn-group">
-                                        <a href="{{ url('/notepad') . '?id=' . $list->id }}" class="btn-white btn btn-xs no-margins">Kladblok</a>
+                                        <a href="{{ url('/notepad') . '?project=' . $list->number }}" class="btn-white btn btn-xs no-margins">Kladblok</a>
                                         <a href="{{ url('/project/edit') . '?id=' . $list->id }}" class="btn-white btn btn-xs no-margins">Bewerk</a>
                                     </div>
                                     @endif
