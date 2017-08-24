@@ -16,7 +16,7 @@
         "guzzlehttp/guzzle": "~5.0|~6.0",
         "egeloen/google-map": "dev-master",
         "willdurand/geocoder": "*",
-        "vlg/gssauth": "1.0.*"
+        "vlg/gssauth": "1.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
